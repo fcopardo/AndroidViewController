@@ -3,7 +3,9 @@ package org.grizzly.androidviewcontroller;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
+import android.os.Bundle;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.RelativeLayout;
 
 /**
@@ -39,6 +41,6 @@ public abstract class RelativeViewController<T> extends RelativeLayout {
         return dataContentController;
     }
 
-    public abstract void initializeComponents();
+    public abstract void initializeComponents(View v, Bundle savedInstanceState);
 
 }
