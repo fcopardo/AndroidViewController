@@ -1,0 +1,82 @@
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+        mavenLocal()
+        maven {
+            url 'https://oss.sonatype.org/content/repositories/snapshots/'
+        }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.1.1'
+        classpath 'org.robolectric:robolectric-gradle-plugin:1.0.1'
+        classpath 'me.tatarka:gradle-retrolambda:2.4.0'
+    }
+}
+apply plugin: 'com.android.library'
+apply plugin: 'org.robolectric'
+apply plugin: 'retrolambda'
+
+repositories {
+    jcenter()
+    mavenCentral()
+    mavenLocal()
+    maven {
+        url 'https://oss.sonatype.org/content/repositories/snapshots/'
+    }
+}
+
+android {
+    sourceSets {
+        androidTest.setRoot('src/test')
+
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        minSdkVersion 10
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+robolectric {
+    // configure the set of classes for JUnit tests
+    include '**/*Test.class'
+    exclude '**/espresso/**/*.class'
+
+    // configure max heap size of the test JVM
+    maxHeapSize = '2048m'
+
+    // configure the test JVM arguments
+    //jvmArgs '-XX:MaxPermSize=512m', '-XX:-UseSplitVerifier'
+
+    // configure whether failing tests should fail the build
+    ignoreFailures false
+
+    // use afterTest to listen to the test execution results
+    afterTest { descriptor, result ->
+        println "Executing test for {$descriptor.name} with result: ${result.resultType}"
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:22.1.1'
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.robolectric:robolectric:2.4'
+}
