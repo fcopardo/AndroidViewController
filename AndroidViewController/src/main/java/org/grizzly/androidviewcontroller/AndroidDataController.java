@@ -3,7 +3,7 @@ package org.grizzly.androidviewcontroller;
 /**
  * Created by FcoPardo on 4/28/15.
  */
-public class AndroidDataController<T>{
+public class AndroidDataController<T extends bundleModel>{
     private Class<T> dataContentClass;
     private T dataContent;
 
