@@ -9,37 +9,44 @@ import android.widget.LinearLayout;
 /**
  * Created by FcoPardo on 4/28/15.
  */
-public abstract class LinearViewController<T> extends LinearLayout {
+public abstract class LinearViewController<T extends bundleModel> extends LinearLayout
+        implements AndroidModelInterface<T> {
 
-    private AndroidDataController<T> dataContentController;
+    private AndroidDataModel<T> dataContentController;
 
     public LinearViewController(Context context, Class<T> dataContentClass) {
         super(context);
-        dataContentController = new AndroidDataController<>(dataContentClass);
+        dataContentController = new AndroidDataModel<>(dataContentClass);
     }
 
     public LinearViewController(Context context, AttributeSet attrs, Class<T> dataContentClass) {
         super(context, attrs);
-        dataContentController = new AndroidDataController<>(dataContentClass);
+        dataContentController = new AndroidDataModel<>(dataContentClass);
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public LinearViewController(Context context, AttributeSet attrs, int defStyleAttr, Class<T> dataContentClass) {
         super(context, attrs, defStyleAttr);
-        dataContentController = new AndroidDataController<>(dataContentClass);
+        dataContentController = new AndroidDataModel<>(dataContentClass);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public LinearViewController(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, Class<T> dataContentClass) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        dataContentController = new AndroidDataController<>(dataContentClass);
+        dataContentController = new AndroidDataModel<>(dataContentClass);
     }
 
-    public AndroidDataController<T> getDataContentController(){
+
+    @Override
+    public AndroidDataModel<T> getModel() {
         return dataContentController;
     }
 
-    public abstract void initializeComponents();
+    @Override
+    public void setModel(T model) {
+        dataContentController.setDataContent(model);
+
+    }
 
 
 }

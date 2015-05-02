@@ -2,30 +2,34 @@ package org.grizzly.androidviewcontroller;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.TableLayout;
 import android.widget.TableRow;
 
 /**
  * Created by FcoPardo on 4/28/15.
  */
-public abstract class RowViewController<T> extends TableRow {
+public abstract class RowViewController<T extends bundleModel> extends TableRow implements AndroidModelInterface<T> {
 
-    private AndroidDataController<T> dataContentController;
+    private AndroidDataModel<T> dataContentController;
 
     public RowViewController(Context context, Class<T> dataContentClass) {
         super(context);
-        dataContentController = new AndroidDataController<>(dataContentClass);
+        dataContentController = new AndroidDataModel<>(dataContentClass);
     }
 
     public RowViewController(Context context, AttributeSet attrs, Class<T> dataContentClass) {
         super(context, attrs);
-        dataContentController = new AndroidDataController<>(dataContentClass);
+        dataContentController = new AndroidDataModel<>(dataContentClass);
     }
 
-    public AndroidDataController<T> getDataContentController(){
+    @Override
+    public AndroidDataModel<T> getModel() {
         return dataContentController;
     }
 
-    public abstract void initializeComponents();
+    @Override
+    public void setModel(T model) {
+        dataContentController.setDataContent(model);
+
+    }
 
 }

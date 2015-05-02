@@ -5,13 +5,9 @@ import android.os.Bundle;
 /**
  * Created by fpardo on 4/30/15.
  */
-public abstract class bundleModel {
+public interface bundleModel {
 
-    public bundleModel(Bundle bundle){
-        setFromBundle(bundle);
-    }
-
-    public abstract void setFromBundle(Bundle bundle);
-    public abstract Bundle getABundle();
+    void setFromBundle(Bundle bundle);
+    Bundle getABundle();
 
 }

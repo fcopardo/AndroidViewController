@@ -7,24 +7,30 @@ import android.widget.TableLayout;
 /**
  * Created by FcoPardo on 4/28/15.
  */
-public abstract class TableViewController<T> extends TableLayout {
+public abstract class TableViewController<T extends bundleModel> extends TableLayout implements AndroidModelInterface<T>{
 
-    private AndroidDataController<T> dataContentController;
+    private AndroidDataModel<T> dataContentController;
 
     public TableViewController(Context context, Class<T> dataContentClass) {
         super(context);
-        dataContentController = new AndroidDataController<>(dataContentClass);
+        dataContentController = new AndroidDataModel<>(dataContentClass);
     }
 
     public TableViewController(Context context, AttributeSet attrs, Class<T> dataContentClass) {
         super(context, attrs);
-        dataContentController = new AndroidDataController<>(dataContentClass);
+        dataContentController = new AndroidDataModel<>(dataContentClass);
     }
 
-    public AndroidDataController<T> getDataContentController(){
+
+    @Override
+    public AndroidDataModel<T> getModel() {
         return dataContentController;
     }
 
-    public abstract void initializeComponents();
+    @Override
+    public void setModel(T model) {
+        dataContentController.setDataContent(model);
+
+    }
 
 }

@@ -3,11 +3,11 @@ package org.grizzly.androidviewcontroller;
 /**
  * Created by FcoPardo on 4/28/15.
  */
-public class AndroidDataController<T extends bundleModel>{
+public class AndroidDataModel<T extends bundleModel>{
     private Class<T> dataContentClass;
     private T dataContent;
 
-    public AndroidDataController(Class<T> myContentClass){
+    public AndroidDataModel(Class<T> myContentClass){
         dataContentClass = myContentClass;
     }
 

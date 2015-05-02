@@ -10,35 +10,41 @@ import android.widget.GridLayout;
  * Created by FcoPardo on 4/28/15.
  */
 @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-public abstract class GridViewController<T> extends GridLayout {
+public abstract class GridViewController<T extends bundleModel> extends GridLayout implements AndroidModelInterface<T>{
 
-    private AndroidDataController<T> dataContentController;
+    private AndroidDataModel<T> dataContentController;
 
     public GridViewController(Context context, Class<T> dataContentClass) {
         super(context);
-        dataContentController = new AndroidDataController<>(dataContentClass);
+        dataContentController = new AndroidDataModel<>(dataContentClass);
     }
 
     public GridViewController(Context context, AttributeSet attrs, Class<T> dataContentClass) {
         super(context, attrs);
-        dataContentController = new AndroidDataController<>(dataContentClass);
+        dataContentController = new AndroidDataModel<>(dataContentClass);
     }
 
     public GridViewController(Context context, AttributeSet attrs, int defStyleAttr, Class<T> dataContentClass) {
         super(context, attrs, defStyleAttr);
-        dataContentController = new AndroidDataController<>(dataContentClass);
+        dataContentController = new AndroidDataModel<>(dataContentClass);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public GridViewController(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, Class<T> dataContentClass) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        dataContentController = new AndroidDataController<>(dataContentClass);
+        dataContentController = new AndroidDataModel<>(dataContentClass);
     }
 
-    public AndroidDataController<T> getDataContentController(){
+    @Override
+    public AndroidDataModel<T> getModel() {
         return dataContentController;
     }
 
-    public abstract void initializeComponents();
+    @Override
+    public void setModel(T model) {
+        dataContentController.setDataContent(model);
+
+    }
+
 
 }

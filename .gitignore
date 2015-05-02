@@ -8,3 +8,4 @@
 /.idea
 target
 build
+/AndroidViewController/gen
