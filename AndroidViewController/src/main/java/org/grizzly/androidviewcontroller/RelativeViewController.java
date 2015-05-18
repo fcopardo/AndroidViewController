@@ -39,12 +39,14 @@ public abstract class RelativeViewController<T extends bundleModel> extends Rela
 
     @Override
     public AndroidDataModel<T> getModel() {
+        getFromComponents();
         return dataContentController;
     }
 
     @Override
     public void setModel(T model) {
         dataContentController.setDataContent(model);
+        setComponents();
     }
 
     protected Activity getActivity() {
@@ -58,4 +60,7 @@ public abstract class RelativeViewController<T extends bundleModel> extends Rela
     }
 
     protected abstract void initComponents();
+
+    protected abstract void setComponents();
+    protected abstract void getFromComponents();
 }

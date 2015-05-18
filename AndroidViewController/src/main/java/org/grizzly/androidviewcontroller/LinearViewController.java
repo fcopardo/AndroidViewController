@@ -40,13 +40,14 @@ public abstract class LinearViewController<T extends bundleModel> extends Linear
 
     @Override
     public AndroidDataModel<T> getModel() {
+        getFromComponents();
         return dataContentController;
     }
 
     @Override
     public void setModel(T model) {
         dataContentController.setDataContent(model);
-
+        setComponents();
     }
 
     protected Activity getActivity() {
@@ -61,5 +62,7 @@ public abstract class LinearViewController<T extends bundleModel> extends Linear
 
     protected abstract void initComponents();
 
+    protected abstract void setComponents();
+    protected abstract void getFromComponents();
 
 }

@@ -38,13 +38,14 @@ public abstract class GridViewController<T extends bundleModel> extends GridLayo
 
     @Override
     public AndroidDataModel<T> getModel() {
+        getFromComponents();
         return dataContentController;
     }
 
     @Override
     public void setModel(T model) {
         dataContentController.setDataContent(model);
-
+        setComponents();
     }
 
     protected Activity getActivity() {
@@ -59,5 +60,7 @@ public abstract class GridViewController<T extends bundleModel> extends GridLayo
 
     protected abstract void initComponents();
 
+    protected abstract void setComponents();
+    protected abstract void getFromComponents();
 
 }
