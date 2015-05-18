@@ -1,5 +1,6 @@
 package org.grizzly.androidviewcontroller;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.TableRow;
@@ -31,5 +32,17 @@ public abstract class RowViewController<T extends bundleModel> extends TableRow 
         dataContentController.setDataContent(model);
 
     }
+
+    protected Activity getActivity() {
+        return (Activity)getContext();
+    }
+
+    @Override
+    protected void onFinishInflate(){
+        super.onFinishInflate();
+        initComponents();
+    }
+
+    protected abstract void initComponents();
 
 }

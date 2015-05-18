@@ -1,6 +1,7 @@
 package org.grizzly.androidviewcontroller;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
@@ -46,6 +47,18 @@ public abstract class FrameViewController<T extends bundleModel> extends FrameLa
         dataContentController.setDataContent(model);
 
     }
+
+    protected Activity getActivity() {
+        return (Activity)getContext();
+    }
+
+    @Override
+    protected void onFinishInflate(){
+        super.onFinishInflate();
+        initComponents();
+    }
+
+    protected abstract void initComponents();
 
 
 }

@@ -1,5 +1,6 @@
 package org.grizzly.androidviewcontroller;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.TableLayout;
@@ -32,5 +33,17 @@ public abstract class TableViewController<T extends bundleModel> extends TableLa
         dataContentController.setDataContent(model);
 
     }
+
+    protected Activity getActivity() {
+        return (Activity)getContext();
+    }
+
+    @Override
+    protected void onFinishInflate(){
+        super.onFinishInflate();
+        initComponents();
+    }
+
+    protected abstract void initComponents();
 
 }
