@@ -86,7 +86,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <sdk>
-                        <platform>19</platform>
+                        <platform>22</platform>
                     </sdk>
                     <nativeLibrariesDirectory>${project.basedir}/libs</nativeLibrariesDirectory>
                 </configuration>

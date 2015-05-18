@@ -44,6 +44,5 @@ public abstract class RelativeViewController<T extends bundleModel> extends Rela
     @Override
     public void setModel(T model) {
         dataContentController.setDataContent(model);
-
     }
 }
