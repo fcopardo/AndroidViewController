@@ -3,6 +3,7 @@ package org.grizzly.androidviewcontroller;
 import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.widget.TableRow;
 
 /**
@@ -11,15 +12,22 @@ import android.widget.TableRow;
 public abstract class RowViewController<T extends bundleModel> extends TableRow implements AndroidModelInterface<T> {
 
     private AndroidDataModel<T> dataContentController;
+    protected int layout = 0;
 
     public RowViewController(Context context, Class<T> dataContentClass) {
         super(context);
         dataContentController = new AndroidDataModel<>(dataContentClass);
+        initMain();
     }
 
     public RowViewController(Context context, AttributeSet attrs, Class<T> dataContentClass) {
         super(context, attrs);
         dataContentController = new AndroidDataModel<>(dataContentClass);
+        initMain();
+    }
+
+    protected void initMain(){
+        ((LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(layout, this, true);
     }
 
     @Override
