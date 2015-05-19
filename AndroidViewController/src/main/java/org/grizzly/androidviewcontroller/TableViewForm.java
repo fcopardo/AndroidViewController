@@ -1,44 +1,27 @@
 package org.grizzly.androidviewcontroller;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.widget.FrameLayout;
+import android.widget.TableLayout;
 
 /**
  * Created by FcoPardo on 4/28/15.
  */
-public abstract class FrameViewController<T extends bundleModel> extends FrameLayout
-        implements AndroidModelInterface<T>{
+public abstract class TableViewForm<T extends bundleModel> extends TableLayout implements AndroidModelInterface<T>{
 
     private AndroidDataModel<T> dataContentController;
     protected int layout = 0;
 
-    public FrameViewController(Context context, Class<T> dataContentClass) {
+    public TableViewForm(Context context, Class<T> dataContentClass) {
         super(context);
         dataContentController = new AndroidDataModel<>(dataContentClass);
         initMain();
     }
 
-    public FrameViewController(Context context, AttributeSet attrs, Class<T> dataContentClass) {
+    public TableViewForm(Context context, AttributeSet attrs, Class<T> dataContentClass) {
         super(context, attrs);
-        dataContentController = new AndroidDataModel<>(dataContentClass);
-        initMain();
-    }
-
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public FrameViewController(Context context, AttributeSet attrs, int defStyleAttr, Class<T> dataContentClass) {
-        super(context, attrs, defStyleAttr);
-        dataContentController = new AndroidDataModel<>(dataContentClass);
-        initMain();
-    }
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public FrameViewController(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, Class<T> dataContentClass) {
-        super(context, attrs, defStyleAttr, defStyleRes);
         dataContentController = new AndroidDataModel<>(dataContentClass);
         initMain();
     }

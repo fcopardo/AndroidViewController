@@ -11,33 +11,33 @@ import android.widget.RelativeLayout;
 /**
  * Created by FcoPardo on 4/28/15.
  */
-public abstract class RelativeViewController<T extends bundleModel> extends RelativeLayout
+public abstract class RelativeViewForm<T extends bundleModel> extends RelativeLayout
         implements AndroidModelInterface<T> {
 
     private AndroidDataModel<T> dataContentController;
     protected int layout = 0;
 
-    public RelativeViewController(Context context, Class<T> dataContentClass) {
+    public RelativeViewForm(Context context, Class<T> dataContentClass) {
         super(context);
         dataContentController = new AndroidDataModel<>(dataContentClass);
         initMain();
     }
 
-    public RelativeViewController(Context context, AttributeSet attrs, Class<T> dataContentClass) {
+    public RelativeViewForm(Context context, AttributeSet attrs, Class<T> dataContentClass) {
         super(context, attrs);
         dataContentController = new AndroidDataModel<>(dataContentClass);
         initMain();
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public RelativeViewController(Context context, AttributeSet attrs, int defStyleAttr, Class<T> dataContentClass) {
+    public RelativeViewForm(Context context, AttributeSet attrs, int defStyleAttr, Class<T> dataContentClass) {
         super(context, attrs, defStyleAttr);
         dataContentController = new AndroidDataModel<>(dataContentClass);
         initMain();
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public RelativeViewController(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, Class<T> dataContentClass) {
+    public RelativeViewForm(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, Class<T> dataContentClass) {
         super(context, attrs, defStyleAttr, defStyleRes);
         dataContentController = new AndroidDataModel<>(dataContentClass);
         initMain();

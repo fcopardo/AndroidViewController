@@ -6,38 +6,42 @@ import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.widget.LinearLayout;
+import android.widget.FrameLayout;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by FcoPardo on 4/28/15.
  */
-public abstract class LinearViewController<T extends bundleModel> extends LinearLayout
-        implements AndroidModelInterface<T> {
+public abstract class FrameViewForm<T extends bundleModel> extends FrameLayout
+        implements AndroidModelInterface<T>, ObservableForm{
 
     private AndroidDataModel<T> dataContentController;
     protected int layout = 0;
+    protected Map<String, FormObserver> myObservers = new HashMap<>();
 
-    public LinearViewController(Context context, Class<T> dataContentClass) {
+    public FrameViewForm(Context context, Class<T> dataContentClass) {
         super(context);
         dataContentController = new AndroidDataModel<>(dataContentClass);
         initMain();
     }
 
-    public LinearViewController(Context context, AttributeSet attrs, Class<T> dataContentClass) {
+    public FrameViewForm(Context context, AttributeSet attrs, Class<T> dataContentClass) {
         super(context, attrs);
         dataContentController = new AndroidDataModel<>(dataContentClass);
         initMain();
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public LinearViewController(Context context, AttributeSet attrs, int defStyleAttr, Class<T> dataContentClass) {
+    public FrameViewForm(Context context, AttributeSet attrs, int defStyleAttr, Class<T> dataContentClass) {
         super(context, attrs, defStyleAttr);
         dataContentController = new AndroidDataModel<>(dataContentClass);
         initMain();
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public LinearViewController(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, Class<T> dataContentClass) {
+    public FrameViewForm(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, Class<T> dataContentClass) {
         super(context, attrs, defStyleAttr, defStyleRes);
         dataContentController = new AndroidDataModel<>(dataContentClass);
         initMain();
@@ -46,7 +50,6 @@ public abstract class LinearViewController<T extends bundleModel> extends Linear
     protected void initMain(){
         ((LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(layout, this, true);
     }
-
 
     @Override
     public AndroidDataModel<T> getModel() {
@@ -74,5 +77,26 @@ public abstract class LinearViewController<T extends bundleModel> extends Linear
 
     protected abstract void setComponents();
     protected abstract void getFromComponents();
+
+    public void addFormObserver(FormObserver f){
+        myObservers.put(f.getClass().getCanonicalName(), f);
+
+    }
+
+    public void removeFormObserver(FormObserver f){
+        myObservers.remove(f.getClass().getCanonicalName());
+    }
+
+    public void notifyObserver(){
+        for(FormObserver f : myObservers.values()){
+            f.onUpdate();
+        }
+    }
+
+    public void notifyObserver(String s){
+        for(FormObserver f : myObservers.values()){
+            f.;
+        }
+    }
 
 }

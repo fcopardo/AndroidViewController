@@ -1,43 +1,27 @@
 package org.grizzly.androidviewcontroller;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.widget.GridLayout;
+import android.widget.TableRow;
 
 /**
  * Created by FcoPardo on 4/28/15.
  */
-@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-public abstract class GridViewController<T extends bundleModel> extends GridLayout implements AndroidModelInterface<T>{
+public abstract class RowViewForm<T extends bundleModel> extends TableRow implements AndroidModelInterface<T> {
 
     private AndroidDataModel<T> dataContentController;
     protected int layout = 0;
 
-    public GridViewController(Context context, Class<T> dataContentClass) {
+    public RowViewForm(Context context, Class<T> dataContentClass) {
         super(context);
         dataContentController = new AndroidDataModel<>(dataContentClass);
         initMain();
     }
 
-    public GridViewController(Context context, AttributeSet attrs, Class<T> dataContentClass) {
+    public RowViewForm(Context context, AttributeSet attrs, Class<T> dataContentClass) {
         super(context, attrs);
-        dataContentController = new AndroidDataModel<>(dataContentClass);
-        initMain();
-    }
-
-    public GridViewController(Context context, AttributeSet attrs, int defStyleAttr, Class<T> dataContentClass) {
-        super(context, attrs, defStyleAttr);
-        dataContentController = new AndroidDataModel<>(dataContentClass);
-        initMain();
-    }
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public GridViewController(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, Class<T> dataContentClass) {
-        super(context, attrs, defStyleAttr, defStyleRes);
         dataContentController = new AndroidDataModel<>(dataContentClass);
         initMain();
     }
